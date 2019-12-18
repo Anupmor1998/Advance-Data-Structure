@@ -1,3 +1,4 @@
+//Link
 #include<stdio.h>
 #include<string.h>
 struct node
