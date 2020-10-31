@@ -67,12 +67,31 @@ typedef queue<int> qi;
 int static dp[SIZE][SIZE];
 
 
-
-int lcs(string x, string y, int n, int m){
-    if(n==0 || m==0) return 0;
-    if(dp[n][m]!=-1) return dp[n][m];
-    if(x[n-1]==y[m-1]) return dp[n][m] =  1+lcs(x,y,n-1,m-1);
-    else return dp[n][m] = max(lcs(x,y,n-1,m),lcs(x,y,n,m-1));
+void longest_subarray(){
+    int n,x;
+    cin >> n;
+    vi v;
+    fori(i,n) cin >> x, v.pb(x);
+    si s;
+    int i=0,j=1;
+    s.insert(v[0]);
+    int sum = v[0];
+    int maxsum = sum;
+    while(i<n-1&&j<n){
+        bool flag = s.find(v[j])!=s.end();
+        if(!flag){
+            sum+=v[j];
+            maxsum = max(maxsum,sum);
+            s.insert(v[j++]);
+        }
+        else{
+            sum-=v[i];
+            s.erase(v[i++]);
+        }
+    } 
+    cout << maxsum << endl;
+    for(auto it: s) cout << it << space;
+    cout << endl;
 }
 
 
@@ -90,7 +109,7 @@ int32_t main()
     for(int T = 1;T<=t;T++){
 
         // cout<<"Case #"<<T<<": ";  
-        lcs();
+        longest_subarray();
     }
 
     // solve();

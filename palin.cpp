@@ -68,11 +68,14 @@ int static dp[SIZE][SIZE];
 
 
 
-int lcs(string x, string y, int n, int m){
-    if(n==0 || m==0) return 0;
-    if(dp[n][m]!=-1) return dp[n][m];
-    if(x[n-1]==y[m-1]) return dp[n][m] =  1+lcs(x,y,n-1,m-1);
-    else return dp[n][m] = max(lcs(x,y,n-1,m),lcs(x,y,n,m-1));
+int palin(string s, int n){
+    mem(dp,-1);
+    for(int i=0;i<n;i++){
+        dp[i][i] = 1;
+    }
+    for(int i=0;i<n-1;i++)
+        if(s[i]==s[i+1]) dp[i][i+1] = 1;
+    
 }
 
 
@@ -90,7 +93,7 @@ int32_t main()
     for(int T = 1;T<=t;T++){
 
         // cout<<"Case #"<<T<<": ";  
-        lcs();
+        palin();
     }
 
     // solve();

@@ -37,11 +37,6 @@ typedef set<int> si;
 typedef queue<int> qi; 
 
 
-/* TRICKS
---> (x | y) >= x, y and (x & y) <=x, y
---> if (num & 1) cout << "ODD"; else cout << "EVEN";
---> floor(log10(n)) + 1  This gives the length of n.
-*/
 
 
 
@@ -66,14 +61,37 @@ typedef queue<int> qi;
 
 int static dp[SIZE][SIZE];
 
+void anagram(){
+    int n;
+    cin >> n;
+    vt<string> s;
+    string x;
+    fori(i,n) cin >> x, s.pb(x);
 
 
-int lcs(string x, string y, int n, int m){
-    if(n==0 || m==0) return 0;
-    if(dp[n][m]!=-1) return dp[n][m];
-    if(x[n-1]==y[m-1]) return dp[n][m] =  1+lcs(x,y,n-1,m-1);
-    else return dp[n][m] = max(lcs(x,y,n-1,m),lcs(x,y,n,m-1));
+    map<array<int,26>,vector<string>> m;
+
+    fori(i,n){
+        array<int,26> a = {};
+        for(auto it: s[i]) ++a[it-'a'];
+        m[a].pb(s[i]);
+    }
+
+    vt<vt<string>> v;
+    for(auto it: m){
+        v.pb(it.second);
+    }
+
+
+    for(int i=0;i<v.size();i++){
+        for(auto it: v[i]) cout << it << space;
+        cout << endl;
+    }
+
+    
 }
+
+
 
 
 int32_t main()
@@ -90,7 +108,7 @@ int32_t main()
     for(int T = 1;T<=t;T++){
 
         // cout<<"Case #"<<T<<": ";  
-        lcs();
+        anagram();
     }
 
     // solve();
